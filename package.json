@@ -1,18 +1,18 @@
 {
-	"name": "icarusext",
-	"displayName": "Verilog Testbench Runner",
-	"description": "Simple solution to run testbench files, includes GTKWave support.",
-	"version": "1.0.3",
-	"publisher": "theonekevin",
+	"name": "ivc",
+	"displayName": "Icarus Verilog VSCode",
+	"description": "Run Verilog/SystemVerilog testbench with GTKWave support.",
+	"version": "1.0.0",
+	"publisher": "dglab",
 	"icon": "images/icon.png",
 	"author": {
-		"name": "Kevin Dai"
+		"name": "j054n"
 	},
 	"license": "MIT (see LICENSE.txt)",
-	"homepage": "https://github.com/TheOneKevin/icarusext",
+	"homepage": "https://github.com/j054n/ivc",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/TheOneKevin/icarusext"
+		"url": "https://github.com/j054n/ivc"
 	},
 	"engines": {
 		"vscode": "^1.56.0"
@@ -21,25 +21,26 @@
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"onLanguage:verilog"
+		"onLanguage:verilog",
+		"onLanguage:systemverilog"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "icarusext.run",
+				"command": "ivc.run",
 				"title": "Compile and run testbench",
 				"icon": "$(debug-start)",
 				"category": "Icarus"
 			},
 			{
-				"command": "icarusext.stop",
+				"command": "ivc.stop",
 				"title": "Stop and clean testbench",
 				"icon": "$(trash)",
 				"category": "Icarus"
 			},
 			{
-				"command": "icarusext.tsizer",
+				"command": "ivc.tsizer",
 				"title": "Get very rough estimate of logic count",
 				"icon": "$(circuit-board)",
 				"category": "Icarus"
@@ -48,13 +49,13 @@
 		"menus": {
 			"editor/title": [
 				{
-					"command": "icarusext.run",
-					"when": "resourceLangId == verilog",
+					"command": "ivc.run",
+					"when": "(resourceLangId == verilog || resourceLangId == systemverilog)",
 					"group": "navigation@1"
 				},
 				{
-					"command": "icarusext.stop",
-					"when": "resourceLangId == verilog",
+					"command": "ivc.stop",
+					"when": "(resourceLangId == verilog || resourceLangId == systemverilog)",
 					"group": "navigation@2"
 				}
 			]
@@ -71,7 +72,7 @@
 				},
 				"verilog.icarusCompileArguments": {
 					"type": "string",
-					"default": "",
+					"default": "-g2012 -Y.sv -y./",
 					"description": "Arguments passed to Verilog compiler.",
 					"scope": "resource"
 				},

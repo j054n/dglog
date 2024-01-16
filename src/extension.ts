@@ -1,18 +1,19 @@
 import * as vscode from 'vscode';
 import { Runner } from './runner';
 
-const ICARUS_CMD_RUN = 'icarusext.run';
-const ICARUS_CMD_STOP = 'icarusext.stop';
-const ICARUS_CMD_TSIZER = 'icarusext.tsizer';
+const ICARUS_CMD_RUN = 'ivc.run';
+const ICARUS_CMD_STOP = 'ivc.stop';
+const ICARUS_CMD_TSIZER = 'ivc.tsizer';
 
 let run = new Runner();
 let status: vscode.StatusBarItem;
 
 function evt(e: vscode.TextDocument | undefined) {
-	if (!e || e.languageId !== 'verilog') {
+	if (!e) {
 		status.text = `$(circuit-board) It's a bit lonely here`;
 	}
-	else {
+	else if (e.languageId == 'systemverilog' || e.languageId == 'verilog') { 
+//	else {
 		vscode.commands.executeCommand(ICARUS_CMD_TSIZER);
 	}
 }
