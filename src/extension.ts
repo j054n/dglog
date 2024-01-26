@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import { Runner } from './runner';
 
-const ICARUS_CMD_RUN = 'ivc.run';
-const ICARUS_CMD_STOP = 'ivc.stop';
+const ICARUS_CMD_RUN = 'dglog.run';
+const ICARUS_CMD_STOP = 'dglog.stop';
 
 let run = new Runner();
 let status: vscode.StatusBarItem;

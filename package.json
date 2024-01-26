@@ -1,18 +1,18 @@
 {
-	"name": "ivc",
-	"displayName": "Icarus Verilog VSCode",
+	"name": "dglog",
+	"displayName": "Icarus Verilog + GTKWave Runner for VSCode",
 	"description": "Run Verilog/SystemVerilog testbench with GTKWave support.",
 	"version": "1.0.0",
 	"publisher": "dglab",
-	"icon": "images/icon.png",
+	"icon": "images/dglab.png",
 	"author": {
 		"name": "j054n"
 	},
 	"license": "MIT (see LICENSE.txt)",
-	"homepage": "https://github.com/j054n/ivc",
+	"homepage": "https://github.com/j054n/dglog",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/j054n/ivc"
+		"url": "https://github.com/j054n/dglog"
 	},
 	"engines": {
 		"vscode": "^1.56.0"
@@ -28,27 +28,27 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "ivc.run",
+				"command": "dglog.run",
 				"title": "Compile and run testbench",
 				"icon": "$(debug-start)",
-				"category": "Icarus"
+				"category": "dglog"
 			},
 			{
-				"command": "ivc.stop",
+				"command": "dglog.stop",
 				"title": "Stop and clean testbench",
 				"icon": "$(trash)",
-				"category": "Icarus"
+				"category": "dglog"
 			}
 		],
 		"menus": {
 			"editor/title": [
 				{
-					"command": "ivc.run",
+					"command": "dglog.run",
 					"when": "(resourceLangId == verilog || resourceLangId == systemverilog)",
 					"group": "navigation@1"
 				},
 				{
-					"command": "ivc.stop",
+					"command": "dglog.stop",
 					"when": "(resourceLangId == verilog || resourceLangId == systemverilog)",
 					"group": "navigation@2"
 				}
@@ -56,18 +56,18 @@
 		},
 		"configuration": {
 			"type": "object",
-			"title": "Verilog configuration",
+			"title": "dglog configuration",
 			"properties": {
 				"verilog.icarusGtkwaveWatchGlob": {
 					"type": "string",
-					"default": "*.vcd",
-					"description": "GTKWave will be summoned when a file satisfying the glob is created (glob is relative to the build directory).",
+					"default": "**/*.vcd",
+					"description": "GTKWave will be launched when a file relative to the build directory satisfy this glob.",
 					"scope": "resource"
 				},
 				"verilog.icarusCompileArguments": {
 					"type": "string",
 					"default": "-g2012 -Y.sv -y.",
-					"description": "Arguments passed to Verilog compiler.",
+					"description": "Arguments passed to Icarus Verilog.",
 					"scope": "resource"
 				},
 				"verilog.icarusBuildDirectory": {
@@ -78,7 +78,7 @@
 				},
 				"verilog.icarusPersistentBuild": {
 					"type": "boolean",
-					"default": false,
+					"default": true,
 					"description": "True if build folder should not be cleared before each compilation.",
 					"scope": "resource"
 				},
@@ -98,7 +98,7 @@
 		}
 	},
 	"extensionPack": [
-		"dglab.ivc"
+		"dglab.dglog"
 	],
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

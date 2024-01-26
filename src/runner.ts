@@ -1,5 +1,5 @@
 import { exec, ChildProcess } from 'child_process';
-import { emptyDirSync, readFileSync } from 'fs-extra';
+import { emptyDirSync, ensureDir, readFileSync } from 'fs-extra';
 
 import * as vscode from 'vscode';
 import * as path from 'path';
@@ -36,7 +36,7 @@ export class Runner implements vscode.Disposable {
     private output: vscode.OutputChannel;
     private procCompile: ChildProcess | undefined;
     private procExec: ChildProcess | undefined;
-    private procGtk: Map<string, ChildProcess>;
+    private procGtk: ChildProcess | undefined; //Map<string, ChildProcess>;
 
     private watcher: vscode.FileSystemWatcher | undefined;
 
@@ -45,7 +45,7 @@ export class Runner implements vscode.Disposable {
 
     constructor() {
         this.output = vscode.window.createOutputChannel(CHANNEL_NAME);
-        this.procGtk = new Map<string, ChildProcess>();
+        //this.procGtk = new Map<string, ChildProcess>();
     }
 
     public async compile(fileUri: vscode.Uri) {
@@ -58,6 +58,10 @@ export class Runner implements vscode.Disposable {
         this.output.show(true);
 
         let cwd = getWorkspaceCwd(fileUri);
+
+        if (CONFIG.build !== '') {
+            ensureDir(path.resolve(cwd, CONFIG.build));
+        }
 
         if (!CONFIG.presist) {
             emptyDirSync(path.resolve(cwd, CONFIG.build));
@@ -92,28 +96,6 @@ export class Runner implements vscode.Disposable {
     private async execute(fileUri: string, cwd: string) {
         this.destroyWatcher();
 
-        let callback = (e: vscode.Uri) => {
-            if (this.procGtk.has(e.fsPath)) {
-                return;
-            }
-
-            vscode.window.showInformationMessage("Output file was created.", OPTION_OPEN, "Cancel").then(selection => {
-                if (selection === OPTION_OPEN) {
-                    let proc = exec(`gtkwave ${e.fsPath}`);
-                    this.procGtk.set(e.fsPath, proc);
-                    proc.on("close", () => this.procGtk.delete(e.fsPath));
-                }
-                this.destroyWatcher();
-            });
-        };
-
-        this.watcher = vscode.workspace.createFileSystemWatcher(
-            new vscode.RelativePattern(cwd, CONFIG.glob),
-            false, true, true
-        );
-        this.watcher.onDidCreate(callback);
-        this.watcher.onDidChange(callback);
-
         await new Promise(r => setTimeout(r, 1000));
 
         let cmd = `vvp ${fileUri}`;
@@ -131,6 +113,14 @@ export class Runner implements vscode.Disposable {
             // We cannot destroy watcher here due to race conditions.
             // Avoid synchronization when possible.
         });
+
+        await new Promise(r => setTimeout(r, 1000));
+
+        let vcd = await vscode.workspace.findFiles(CONFIG.glob, null, 1);
+        if (vcd.length !== 0) {
+            this.output.appendLine(`Trying GTKWave with file ${vcd[0].path}`);
+            this.procGtk = exec(`gtkwave ${vcd[0].path}`);
+        }
     }
 
     public stop(cwd: string | null) {
