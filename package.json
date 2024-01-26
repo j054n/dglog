@@ -38,12 +38,6 @@
 				"title": "Stop and clean testbench",
 				"icon": "$(trash)",
 				"category": "Icarus"
-			},
-			{
-				"command": "ivc.tsizer",
-				"title": "Get very rough estimate of logic count",
-				"icon": "$(circuit-board)",
-				"category": "Icarus"
 			}
 		],
 		"menus": {
@@ -72,7 +66,7 @@
 				},
 				"verilog.icarusCompileArguments": {
 					"type": "string",
-					"default": "-g2012 -Y.sv -y./",
+					"default": "-g2012 -Y.sv -y.",
 					"description": "Arguments passed to Verilog compiler.",
 					"scope": "resource"
 				},
@@ -96,7 +90,7 @@
 				},
 				"verilog.icarusTestbenchIncludePwd": {
 					"type": "boolean",
-					"default": false,
+					"default": true,
 					"description": "Include directory of current running file",
 					"scope": "resource"
 				}
@@ -104,7 +98,7 @@
 		}
 	},
 	"extensionPack": [
-		"mshr-h.veriloghdl"
+		"dglab.ivc"
 	],
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
