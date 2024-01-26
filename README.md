@@ -8,7 +8,7 @@ Run Verilog/SystemVerilog testbench with Icarus Verilog and GTKWave support.
 
 The extension need Verilog and SystemVerilog filetypes registry in VSCode, the easy way is to install previously the extension `mshr-h.veriloghdl` from [VS Code Marketplace](https://marketplace.visualstudio.com/items/mshr-h.VerilogHDL) or [Open VSX Registry](https://open-vsx.org/extension/mshr-h/veriloghdl) that includes HDL support for VS Code with Syntax Highlighting, Snippets, Linting, Formatting, etc.
 
-![](images/dglog.png)
+![](https://github.com/j054n/dglog/blob/main/images/dglog.png)
 
 Also it is necessary to install Icarus Verilog and GTKWave tools, and be sure that `iverilog` and `gtkwave` have beebn added to your environment PATH variable.
 If you need help, check out the installation guide for [Windows](http://bleyer.org/icarus/) and [other OSes](https://iverilog.fandom.com/wiki/Installation_Guide).
@@ -23,7 +23,7 @@ The extension adds in VSCode:
 - a **status** item positioned in the lower-right corner
 - **console log output** of commands and running testbench
 
-![](images/tst.png)
+![](https://github.com/j054n/dglog/blob/main/images/tst.png)
 
 ## Configuration settings
 
