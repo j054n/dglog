@@ -1,15 +1,15 @@
 {
 	"name": "dglog",
-	"displayName": "Icarus Verilog + GTKWave Runner for VSCode",
-	"description": "Run Verilog/SystemVerilog testbench with GTKWave support.",
+	"displayName": "dglog",
+	"description": "Run Verilog/SystemVerilog testbench with Icarus Verilog and GTKWave support.",
 	"version": "1.0.0",
-	"publisher": "dglab",
+	"publisher": "j054n",
 	"icon": "images/dglab.png",
 	"author": {
 		"name": "j054n"
 	},
 	"license": "MIT (see LICENSE.txt)",
-	"homepage": "https://github.com/j054n/dglog",
+	"homepage": "https://github.com/j054n",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/j054n/dglog"
