@@ -31,7 +31,7 @@ module alu1_tb
     begin
       $dumpfile("alu1.vcd");
       $dumpvars(0,alu1_tb);
-      //for (ii=1;ii<16;ii=ii+1) $dumpvars(0, rvx1_tb.uut.x[ii]);
+
       // Initialize Inputs
       clk = 0;
       rst = 1;

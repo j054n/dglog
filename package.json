@@ -58,7 +58,7 @@
 			"type": "object",
 			"title": "dglog configuration",
 			"properties": {
-				"verilog.icarusGtkwaveWatchGlob": {
+				"verilog.gtkwaveWatchGlob": {
 					"type": "string",
 					"default": "**/*.vcd",
 					"description": "GTKWave will be launched when a file relative to the build directory satisfy this glob.",
