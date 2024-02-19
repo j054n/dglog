@@ -2,7 +2,7 @@
 	"name": "dglog",
 	"displayName": "dglog",
 	"description": "Run Verilog/SystemVerilog testbench with Icarus Verilog and GTKWave support.",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "j054n",
 	"icon": "images/dglab.png",
 	"author": {

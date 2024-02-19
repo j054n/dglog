@@ -118,8 +118,11 @@ export class Runner implements vscode.Disposable {
 
         let vcd = await vscode.workspace.findFiles(CONFIG.glob, null, 1);
         if (vcd.length !== 0) {
-            this.output.appendLine(`Trying GTKWave with file ${vcd[0].path}`);
-            this.procGtk = exec(`gtkwave ${vcd[0].path}`);
+            let vcduri = path.relative(cwd, vcd[0].fsPath);//
+            let cmdvcd = `gtkwave ${vcduri}`;//
+            this.output.appendLine(`Trying GTKWave with file ${vcduri}`);//this.output.appendLine(`Trying GTKWave with file ${vcd[0].path}`);
+            this.procGtk = exec(cmdvcd, { cwd: cwd });//this.procGtk = exec(`gtkwave ${vcd[0].path}`);
+            this.procGtk = undefined;
         }
     }
 
